@@ -9,4 +9,4 @@ A tutorial (vignette) is availiable for this package, it provides basic informat
 
 To access it:
 
-**vignette("SER")**
+`vignette("SER")`
