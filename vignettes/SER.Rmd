@@ -1,0 +1,127 @@
+---
+title: "SER-vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{SER-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(kableExtra)
+library(lubridate)
+load("SER_tutorial.rda") 
+```
+
+This tutorial is about how to calculate short-period environmental regime (SER) with a R package **SER**. It provides basic information of how short-period environmental rigime is developed and how it can be used for hydrological data as an example. It includes following parts:
+
+- **Overview**: introduction about how these indices are constructed.
+- **Arguments of the SER function**: detail information about three arguments of the main function _SER_.
+- **Example**: an example that shows how SER apply to hydrological data.
+- **Potential application of this function**: apart from short-period hydrological indices, its potential usage is discussed briefly.
+
+# Overview
+
+Environment regime (or environment pattern), unlike traditional environmental variables, is defined as the environmental dynamic characteristics during a given (either long or short) period, such as change rate, distribution and extreme events, which might be masked by using simple average or median values. As linking environmental changes to biotic responses is one of the central topics in ecology, incorporating environment regimes into ecological studies can greatly advance our understanding between biota-environment relations. For example, short-period flow regime indices (e.g., skewness, change rate in flow events) played a vital role in riverine algal community (Qu et al. 2019; Wu et al. 2018, 2019)
+
+With the facilitation of science and technology, more and more high frequently (daily or even hourly) measured environmental variables (e.g., nutrient concentration, dissolved oxygen) are available nowadays. These high frequency measured data allow computing environment regime indices. However, an R package or function that can be easily used to calculate short-term environment regime is still missing. 
+
+Therefore, we developed the so called short-period environmental regime (SER) to characterize such frequently measured environmental data and make them suitable to link with spot shot biotic data. Such regime is inspired by Olden and Poff (2003), which developed a series of indices to identify the characteristics of flow variation in riverine study. In total, 11 elementary indices that concentrate more about environmental variation in short-period were developed (Table 1). It should be noted that short-period defined here is case specific. For example, for some study, changes in days are the interested period, while for other, hours/months/years may be the target time interval. For current version, this function is developed with regarding days as the interested period, since we do not have available data that interested in other time interval.
+
+
+**Table 1. Detail information of the 11 elementary indices**
+
+```{r echo=FALSE}
+kable(indice_info) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"),full_width = T,position = "center") %>% 
+  #row_spec(c(1,6,11),bold = T) %>% # specifying formate of the 3 aspects of flow events
+  row_spec(0, bold = T,font_size = 16) %>% # specifying the format of header
+  pack_rows("Magnitude of environmental data",1,4) %>% 
+  pack_rows("Frequency of environmental data",5,8) %>% 
+  pack_rows("Rate of change of environmental data",9,11) %>% 
+  footnote(symbol =c("Units of some indices are dependent on types of environmental data.","Currently, the function is developed with regarding days as the interested period, more features are under development.",
+  "N can be defined as any interested time period, by default N=BetwSamT (days between two successive sampling dates).") )
+```
+
+
+# Arguments of the _SER_ function
+
+- **`Env_data`**: time series environmental data, a dataframe with columns _Date_ and _Env_, make sure _Date_ is in date format while _Env_ is in numeric format.  
+
+- **`sample_date`**: sampling dates, a vector containing sampling days. Date for initiation of the experiment (measurements) should be included as the first element of the vector.
+- **`days_bf`**: N days before the sampling date (not included); by default, days_bf = c(days between two successive sampling dates) 
+
+
+# Examples
+Below is an example showing how short-period environmental regime can be used for discharge data. Firstly, short-period environmental regime (in this case it is short-period hydrological regime) in days between two successive sampling dates (Table 2) were developed based on the 11 elementary indices. In total, 11 short-period hydrological indices were developed. The indices' names were constructed as the combination of short time period and names of elementary indices, for example, BetwSamT.MA1 and BetwSamT.RC stand for mean of the daily average flow and mean rate of change in days  between two successive sampling days respectively.
+
+**Table 2. Short-period hydrological indices**
+
+```{r echo=FALSE}
+kable(hydro_info) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"),full_width = T,position = "center") %>% 
+  #row_spec(c(1,6,11),bold = T) %>% # specifying formate of the 3 aspects of flow events
+  row_spec(0, bold = T,font_size = 16) %>% # specifying the format of header
+  pack_rows("Magnitude of flow events",1,4) %>% 
+  pack_rows("Frequency of flow events",5,8) %>% 
+  pack_rows("Rate of change of flow events",9,11)
+  
+```
+
+It should be noted that the time period for estimating high/low flow pulse is 2016-2018, which is the time period interested in the unpublished work. When applying function with other types of data, such time period is automatically defined as the period of the input data **Env_data**.
+
+
+There are two data sets:
+
+- **hydro_df** is a dataframe, i.e., discharge data for three streams for the period of 2016-2018. There are two columns, i.e., _Date_ (should be in date format) and _Discharge_ (should be numeric data; unit: L/s). Below is the structure of the first elements in the list.
+
+```{r}
+library(SER)
+str(hydro_df)
+```
+
+Then we need to change the column name _Discharge_ to _Env_.
+
+```{r }
+names(hydro_df)[2] <- "Env"
+```
+
+- **sample_date** is a vector that contains 13 date elements, first of which is the initiate date of the experiment while the rest 12 are the sampling dates.
+
+```{r }
+str(sample_date)
+```
+
+We will use _lapply_ to calculate indices for the list. Default value for arguments `days_bf` is used.
+
+```{r }
+hydro_ser <- SER(hydro_df,sample_date,days_bf = NULL)
+str(hydro_ser)
+head(hydro_ser)
+```
+
+# Potential application of the indices
+* Here we only used stream discharge data to estimate short-period hydrological regime, but this function is also suitable for estimation of other types of environmental data e.g., nutrient concentration, light, dissolved oxygen and etc. 
+
+* In addition, by changing the argument `days_bf`, it is possible to get regimes in any interested period, such as between hours, months or years, as long as the data is measured in corresponding manners.
+
+* More features are under development.
+
+
+# References
+Olden, Julian D, and NL Poff. 2003. “Redundancy and the Choice of Hydrologic Indices for Characterizing Streamflow Regimes.” River Research and Applications 19 (2): 101–21.
+
+Qu, Yueming, Naicheng Wu, Björn Guse, Kristė Makarevičiūtė, Xiuming Sun, and Nicola Fohrer. 2019. “Riverine Phytoplankton Functional Groups Response to Multiple Stressors Variously Depending on Hydrological Periods.” Ecological Indicators 101: 41–49.
+
+Wu, Naicheng, Yueming Qu, Björn Guse, Kristė Makarevičiūtė, Szewing To, Tenna Riis, and Nicola Fohrer. 2018. “Hydrological and Environmental Variables Outperform Spatial Factors in Structuring Species, Trait Composition, and Beta Diversity of Pelagic Algae.” Ecology and Evolution 8 (5): 2947–61.
+
+Wu, Naicheng, Hans Thodsen, Hans Estrup Andersen, Henrik Tornbjerg, Annette Baattrup-Pedersen, and Tenna Riis. 2019. “Flow Regimes Filter Species Traits of Benthic Diatom Communities and Modify the Functional Features of Lowland Streams-a Nationwide Scale Study.” Science of the Total Environment 651: 357–66.
+
