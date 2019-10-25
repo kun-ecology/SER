@@ -10,3 +10,7 @@ A tutorial (vignette) is availiable for this package, it provides basic informat
 To access it:
 
 `vignette("SER")`
+
+# Citation
+_Kun Guo, Naicheng Wu and Tenna Riis (2019). SER: Short-period Environmental Regime. R package version 0.0._
+
