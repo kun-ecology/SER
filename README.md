@@ -28,11 +28,12 @@ Below is how the main function _SER_ works with the demo data:
 
 We highly recommend you read through the tutorial and then define your own short-period environmental indices.
 
-This is the first version of the package, there might be some bugs. 
+**NOTES**
++ This is the first version of the package, there might be some bugs. 
 
-In addition, more features are under development.
++ In addition, more features are under development.
 
-We are more than welcome to your feedbacks/suggestions.
++ We are more than welcome to your feedbacks/suggestions.
 
 
 # Citation
