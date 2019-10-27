@@ -18,7 +18,7 @@ To access it:
 vignette("SER")
 ```
 
-We only use hydrological data as an example, but short-period environmental regime is case specific, see the vignette for details. 
+We only use hydrological data as an example in the tutorial, but short-period environmental regime is case specific, see the vignette for details. 
 
 There are two datasets embeded in the package: _hydro_df_, a dataframe, containing daily discharge data in a stream; _sample_date_, a vector, containing 13 elements (in date fromate).  
 
