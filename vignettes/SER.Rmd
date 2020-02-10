@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ---
 title: "SER-vignette"
 output: rmarkdown::html_vignette
@@ -7,13 +6,6 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
 
 ```{r setup, include=FALSE}
 library(tidyverse)
@@ -254,4 +246,3 @@ Wu, Naicheng, Yueming Qu, Björn Guse, Kristė Makarevičiūtė, Szewing To, Ten
 
 Wu, Naicheng, Hans Thodsen, Hans Estrup Andersen, Henrik Tornbjerg, Annette Baattrup-Pedersen, and Tenna Riis. 2019. “Flow Regimes Filter Species Traits of Benthic Diatom Communities and Modify the Functional Features of Lowland Streams-a Nationwide Scale Study.” Science of the Total Environment 651: 357–66.
 
->>>>>>> 3c0cf6a22549acab97984220652a4e3407f6d8c2
