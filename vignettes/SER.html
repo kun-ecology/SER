@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -750,3 +751,757 @@ Numbers of day change decline in N days before sampling date. i.e., numbers of n
 
 </body>
 </html>
+=======
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+<title>SER-vignette</title>
+
+<script>$(document).ready(function(){
+    if (typeof $('[data-toggle="tooltip"]').tooltip === 'function') {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+    if ($('[data-toggle="popover"]').popover === 'function') {
+        $('[data-toggle="popover"]').popover();
+    }
+});
+</script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">SER-vignette</h1>
+
+
+
+<p>This tutorial is about how to calculate short-period environmental regime (SER) with a R package <strong>SER</strong>. It provides basic information of how short-period environmental rigime is developed and how it can be used for hydrological data as an example. It includes following parts:</p>
+<ul>
+<li><strong>Overview</strong>: introduction about how these indices are constructed.</li>
+<li><strong>Arguments of the SER function</strong>: detail information about three arguments of the main function <em>SER</em>.</li>
+<li><strong>Example</strong>: an example that shows how SER apply to hydrological data.</li>
+<li><strong>Potential application of this function</strong>: apart from short-period hydrological indices, its potential usage is discussed briefly.</li>
+</ul>
+<div id="overview" class="section level1">
+<h1>Overview</h1>
+<p>Environment regime (or environment pattern), unlike traditional environmental variables, is defined as the environmental dynamic characteristics during a given (either long or short) period, such as change rate, distribution and extreme events, which might be masked by using simple average or median values. As linking environmental changes to biotic responses is one of the central topics in ecology, incorporating environment regimes into ecological studies can greatly advance our understanding between biota-environment relations. For example, short-period flow regime indices (e.g., skewness, change rate in flow events) played a vital role in riverine algal community (Qu et al. 2019; Wu et al. 2018, 2019)</p>
+<p>With the facilitation of science and technology, more and more high frequently (daily or even hourly) measured environmental variables (e.g., nutrient concentration, dissolved oxygen) are available nowadays. These high frequency measured data allow computing environment regime indices. However, an R package or function that can be easily used to calculate short-term environment regime is still missing.</p>
+<p>Therefore, we developed the so called short-period environmental regime (SER) to characterize such frequently measured environmental data and make them suitable to link with spot shot biotic data. Such regime is inspired by Olden and Poff (2003), which developed a series of indices to identify the characteristics of flow variation in riverine study. In total, 11 elementary indices that concentrate more about environmental variation in short-period were developed (Table 1). It should be noted that short-period defined here is case specific. For example, for some study, changes in days are the interested period, while for other, hours/months/years may be the target time interval. For current version, this function is developed with regarding days as the interested period, since we do not have available data that interested in other time interval.</p>
+<p><strong>Table 1. Detail information of the 11 elementary indices</strong></p>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;font-size: 16px;">
+Code
+</th>
+<th style="text-align:left;font-weight: bold;font-size: 16px;">
+Unit
+</th>
+<th style="text-align:left;font-weight: bold;font-size: 16px;">
+Definition
+</th>
+</tr>
+</thead>
+<tbody>
+<tr grouplength="4">
+<td colspan="3" style="border-bottom: 1px solid;">
+<strong>Magnitude of environmental data</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+MA1
+</td>
+<td style="text-align:left;">
+Depending on types of environmental data
+</td>
+<td style="text-align:left;">
+Mean of the daily environmental data in N days before sampling date.
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+MA2
+</td>
+<td style="text-align:left;">
+Depending on types of environmental data
+</td>
+<td style="text-align:left;">
+Median of the daily environmental data in N days before sampling date
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+MA3
+</td>
+<td style="text-align:left;">
+%
+</td>
+<td style="text-align:left;">
+Coefficient of variation in N days before sampling date
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+MA4
+</td>
+<td style="text-align:left;">
+unitless
+</td>
+<td style="text-align:left;">
+Skewness of N days environmental data
+</td>
+</tr>
+<tr grouplength="4">
+<td colspan="3" style="border-bottom: 1px solid;">
+<strong>Frequency of environmental data</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+ML1
+</td>
+<td style="text-align:left;">
+days
+</td>
+<td style="text-align:left;">
+Low pulse count N days: numbers of occurrence during N days which the magnitude of environmental regimes below a lower threshold. Low pulse is defined as the number of days in which the environmental data drops below the 25th percentile of all daily values for the giving time period.
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+MH1
+</td>
+<td style="text-align:left;">
+days
+</td>
+<td style="text-align:left;">
+High pulse count N days: numbers of occurrence during N days which the magnitude of environmental regimes below a higher threshold. High pulse is defined as the number of days in which the environmental data above the 75th percentile of all daily values for the giving time period.
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+EL1
+</td>
+<td style="text-align:left;">
+days
+</td>
+<td style="text-align:left;">
+Extreme low pulse count N days: numbers of occurrence during N days which the magnitude of environmental regimes remains below a extreme lower threshold. Extreme low pulse is defined as the number of days in which the environmental data drops below the 10th percentile of all daily values for the time period.
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+EH1
+</td>
+<td style="text-align:left;">
+days
+</td>
+<td style="text-align:left;">
+Extreme high pulse count N days: numbers of occurrence during N days which the magnitude of environmental remains above a extreme higher threshold. Extreme high pulse is defined as the number of days in which the environmental data above the 90th percentile of all daily values for the time period.
+</td>
+</tr>
+<tr grouplength="3">
+<td colspan="3" style="border-bottom: 1px solid;">
+<strong>Rate of change of environmental data</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+RC
+</td>
+<td style="text-align:left;">
+Depending on types of environmental data
+</td>
+<td style="text-align:left;">
+Rate of change in N days before sampling date.
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+RH1
+</td>
+<td style="text-align:left;">
+days
+</td>
+<td style="text-align:left;">
+Numbers of day change rises in N days before sampling date. i.e., numbers of positive change
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+RL1
+</td>
+<td style="text-align:left;">
+days
+</td>
+<td style="text-align:left;">
+Numbers of day change decline in N days before sampling date. i.e., numbers of negative change
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>*</sup> Units of some indices are dependent on types of environmental data.
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>†</sup> Currently, the function is developed with regarding days as the interested period, more features are under development.
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>‡</sup> N can be defined as any interested time period, by default N=BetwSamT (days between two successive sampling dates).
+</td>
+</tr>
+</tfoot>
+</table>
+</div>
+<div id="arguments-of-the-ser-function" class="section level1">
+<h1>Arguments of the <em>SER</em> function</h1>
+<ul>
+<li><p><strong><code>Env_data</code></strong>: time series environmental data, a dataframe with columns <em>Date</em> and <em>Env</em>, make sure <em>Date</em> is in date format while <em>Env</em> is in numeric format.</p></li>
+<li><strong><code>sample_date</code></strong>: sampling dates, a vector containing sampling days. Date for initiation of the experiment (measurements) should be included as the first element of the vector.</li>
+<li><p><strong><code>days_bf</code></strong>: N days before the sampling date (not included); by default, days_bf = c(days between two successive sampling dates)</p></li>
+</ul>
+</div>
+<div id="examples" class="section level1">
+<h1>Examples</h1>
+<p>Below is an example showing how short-period environmental regime can be used for discharge data. Firstly, short-period environmental regime (in this case it is short-period hydrological regime) in days between two successive sampling dates (Table 2) were developed based on the 11 elementary indices. In total, 11 short-period hydrological indices were developed. The indices’ names were constructed as the combination of short time period and names of elementary indices, for example, BetwSamT.MA1 and BetwSamT.RC stand for mean of the daily average flow and mean rate of change in days between two successive sampling days respectively.</p>
+<p><strong>Table 2. Short-period hydrological indices</strong></p>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;font-size: 16px;">
+Code
+</th>
+<th style="text-align:left;font-weight: bold;font-size: 16px;">
+Unit
+</th>
+<th style="text-align:left;font-weight: bold;font-size: 16px;">
+Definition
+</th>
+</tr>
+</thead>
+<tbody>
+<tr grouplength="4">
+<td colspan="3" style="border-bottom: 1px solid;">
+<strong>Magnitude of flow events</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+MA1
+</td>
+<td style="text-align:left;">
+L/s
+</td>
+<td style="text-align:left;">
+Mean of the daily average flow values in N days before sampling date
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+MA2
+</td>
+<td style="text-align:left;">
+L/s
+</td>
+<td style="text-align:left;">
+Median of the daily average flow values in N days before sampling date
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+MA3
+</td>
+<td style="text-align:left;">
+%
+</td>
+<td style="text-align:left;">
+Coefficient of variation in N days before sampling date
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+MA4
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Skewness of N days flows
+</td>
+</tr>
+<tr grouplength="4">
+<td colspan="3" style="border-bottom: 1px solid;">
+<strong>Frequency of flow events</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+ML1
+</td>
+<td style="text-align:left;">
+days
+</td>
+<td style="text-align:left;">
+Low flood pulse count N days: numbers of occurrence during N days which the magnitude of flow remains below a lower threshold. Low flow pulse is defined as the number of days in which the flow drops below the 25th percentile of all daily values for the time period (2016 - 2018).
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+MH1
+</td>
+<td style="text-align:left;">
+days
+</td>
+<td style="text-align:left;">
+Number of occurrences during N days which the magnitude of flow remains above a higher threshold. High flood pulses are defined as the number of days in which the flow rises above the 75th percentile (high pulse) of all daily values for the time period (2016 - 2018).
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+EL1
+</td>
+<td style="text-align:left;">
+days
+</td>
+<td style="text-align:left;">
+Extreme low flow count N days: numbers of occurrence during N days which the magnitude of flow remains below a lower threshold. Extreme low flow pulse is defined as the number of days in which the flow drops below the 10th percentile of all daily values for the time period (2016 - 2018).
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+EH1
+</td>
+<td style="text-align:left;">
+days
+</td>
+<td style="text-align:left;">
+Extreme high flow count N days: numbers of occurrence during N days which the magnitude of flow remains above a higher threshold. Extreme high flow pulse is defined as the number of days in which the flow above the 90th percentile of all daily values for the time period (2016 - 2018)
+</td>
+</tr>
+<tr grouplength="3">
+<td colspan="3" style="border-bottom: 1px solid;">
+<strong>Rate of change of flow events</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+RC
+</td>
+<td style="text-align:left;">
+L/s
+</td>
+<td style="text-align:left;">
+Mean rate of change in N days before sampling date.
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+RH1
+</td>
+<td style="text-align:left;">
+days
+</td>
+<td style="text-align:left;">
+Numbers of day change rises in N days before sampling date. i.e., numbers of positive flow change
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+RL1
+</td>
+<td style="text-align:left;">
+days
+</td>
+<td style="text-align:left;">
+Numbers of day change decline in N days before sampling date. i.e., numbers of negative flow change
+</td>
+</tr>
+</tbody>
+</table>
+<p>It should be noted that the time period for estimating high/low flow pulse is 2016-2018, which is the time period interested in the unpublished work. When applying function with other types of data, such time period is automatically defined as the period of the input data <strong>Env_data</strong>.</p>
+<p>There are two data sets:</p>
+<ul>
+<li><strong>hydro_df</strong> is a dataframe, i.e., discharge data for three streams for the period of 2016-2018. There are two columns, i.e., <em>Date</em> (should be in date format) and <em>Discharge</em> (should be numeric data; unit: L/s). Below is the structure of the first elements in the list.</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(SER)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">str</span>(hydro_df)</a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="co">#&gt; Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    972 obs. of  2 variables:</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="co">#&gt;  $ Date     : POSIXct, format: &quot;2016-01-01&quot; &quot;2016-01-02&quot; ...</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="co">#&gt;  $ Discharge: num  157 147 133 126 117 ...</span></a></code></pre></div>
+<p>Then we need to change the column name <em>Discharge</em> to <em>Env</em>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">names</span>(hydro_df)[<span class="dv">2</span>] &lt;-<span class="st"> &quot;Env&quot;</span></a></code></pre></div>
+<ul>
+<li><strong>sample_date</strong> is a vector that contains 13 date elements, first of which is the initiate date of the experiment while the rest 12 are the sampling dates.</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">str</span>(sample_date)</a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="co">#&gt;  Date[1:13], format: &quot;2017-02-07&quot; &quot;2017-03-07&quot; &quot;2017-04-04&quot; &quot;2017-05-02&quot; &quot;2017-05-30&quot; ...</span></a></code></pre></div>
+<p>We will use <em>lapply</em> to calculate indices for the list. Default value for arguments <code>days_bf</code> is used.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">hydro_ser &lt;-<span class="st"> </span><span class="kw">SER</span>(hydro_df,sample_date,<span class="dt">days_bf =</span> <span class="ot">NULL</span>)</a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw">str</span>(hydro_ser)</a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="co">#&gt; &#39;data.frame&#39;:    12 obs. of  12 variables:</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="co">#&gt;  $ SampleDate  : chr  &quot;2017-03-07&quot; &quot;2017-04-04&quot; &quot;2017-05-02&quot; &quot;2017-05-30&quot; ...</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="co">#&gt;  $ BetwSamT.MA1: num  105 95.2 52 26.5 24.3 ...</span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="co">#&gt;  $ BetwSamT.MA2: num  57.9 86.6 44.5 26 15.1 ...</span></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="co">#&gt;  $ BetwSamT.MA3: num  0.767 0.395 0.398 0.301 0.642 ...</span></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="co">#&gt;  $ BetwSamT.MA4: num  1.81 1.1 1.17 1.02 1.62 ...</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="co">#&gt;  $ BetwSamT.ML1: num  0 0 0 9 13 25 10 7 0 0 ...</span></a>
+<a class="sourceLine" id="cb4-10" title="10"><span class="co">#&gt;  $ BetwSamT.MH1: num  11 10 1 0 0 0 1 6 18 16 ...</span></a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="co">#&gt;  $ BetwSamT.EL1: num  0 0 0 0 1 18 3 0 0 0 ...</span></a>
+<a class="sourceLine" id="cb4-12" title="12"><span class="co">#&gt;  $ BetwSamT.EH1: num  6 2 0 0 0 0 0 5 8 6 ...</span></a>
+<a class="sourceLine" id="cb4-13" title="13"><span class="co">#&gt;  $ BetwSamT.RC : num  7.017 -1.426 0.571 -0.697 0.214 ...</span></a>
+<a class="sourceLine" id="cb4-14" title="14"><span class="co">#&gt;  $ BetwSamT.RL1: num  18 20 15 20 11 18 15 16 18 18 ...</span></a>
+<a class="sourceLine" id="cb4-15" title="15"><span class="co">#&gt;  $ BetwSamT.RH1: num  8 6 11 5 8 8 10 11 8 8 ...</span></a>
+<a class="sourceLine" id="cb4-16" title="16"><span class="kw">head</span>(hydro_ser)</a>
+<a class="sourceLine" id="cb4-17" title="17"><span class="co">#&gt;   SampleDate BetwSamT.MA1 BetwSamT.MA2 BetwSamT.MA3 BetwSamT.MA4</span></a>
+<a class="sourceLine" id="cb4-18" title="18"><span class="co">#&gt; 1 2017-03-07      105.000       57.850        0.767        1.815</span></a>
+<a class="sourceLine" id="cb4-19" title="19"><span class="co">#&gt; 2 2017-04-04       95.234       86.570        0.395        1.100</span></a>
+<a class="sourceLine" id="cb4-20" title="20"><span class="co">#&gt; 3 2017-05-02       51.968       44.485        0.398        1.168</span></a>
+<a class="sourceLine" id="cb4-21" title="21"><span class="co">#&gt; 4 2017-05-30       26.521       26.020        0.301        1.019</span></a>
+<a class="sourceLine" id="cb4-22" title="22"><span class="co">#&gt; 5 2017-06-20       24.347       15.060        0.642        1.617</span></a>
+<a class="sourceLine" id="cb4-23" title="23"><span class="co">#&gt; 6 2017-07-18       12.620        9.495        0.624        1.329</span></a>
+<a class="sourceLine" id="cb4-24" title="24"><span class="co">#&gt;   BetwSamT.ML1 BetwSamT.MH1 BetwSamT.EL1 BetwSamT.EH1 BetwSamT.RC</span></a>
+<a class="sourceLine" id="cb4-25" title="25"><span class="co">#&gt; 1            0           11            0            6       7.017</span></a>
+<a class="sourceLine" id="cb4-26" title="26"><span class="co">#&gt; 2            0           10            0            2      -1.426</span></a>
+<a class="sourceLine" id="cb4-27" title="27"><span class="co">#&gt; 3            0            1            0            0       0.571</span></a>
+<a class="sourceLine" id="cb4-28" title="28"><span class="co">#&gt; 4            9            0            0            0      -0.697</span></a>
+<a class="sourceLine" id="cb4-29" title="29"><span class="co">#&gt; 5           13            0            1            0       0.214</span></a>
+<a class="sourceLine" id="cb4-30" title="30"><span class="co">#&gt; 6           25            0           18            0      -0.182</span></a>
+<a class="sourceLine" id="cb4-31" title="31"><span class="co">#&gt;   BetwSamT.RL1 BetwSamT.RH1</span></a>
+<a class="sourceLine" id="cb4-32" title="32"><span class="co">#&gt; 1           18            8</span></a>
+<a class="sourceLine" id="cb4-33" title="33"><span class="co">#&gt; 2           20            6</span></a>
+<a class="sourceLine" id="cb4-34" title="34"><span class="co">#&gt; 3           15           11</span></a>
+<a class="sourceLine" id="cb4-35" title="35"><span class="co">#&gt; 4           20            5</span></a>
+<a class="sourceLine" id="cb4-36" title="36"><span class="co">#&gt; 5           11            8</span></a>
+<a class="sourceLine" id="cb4-37" title="37"><span class="co">#&gt; 6           18            8</span></a></code></pre></div>
+</div>
+<div id="potential-application-of-the-indices" class="section level1">
+<h1>Potential application of the indices</h1>
+<ul>
+<li><p>Here we only used stream discharge data to estimate short-period hydrological regime, but this function is also suitable for estimation of other types of environmental data e.g., nutrient concentration, light, dissolved oxygen and etc.</p></li>
+<li><p>In addition, by changing the argument <code>days_bf</code>, it is possible to get regimes in any interested period, such as between hours, months or years, as long as the data is measured in corresponding manners.</p></li>
+<li><p>More features are under development.</p></li>
+</ul>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+<p>Olden, Julian D, and NL Poff. 2003. “Redundancy and the Choice of Hydrologic Indices for Characterizing Streamflow Regimes.” River Research and Applications 19 (2): 101–21.</p>
+<p>Qu, Yueming, Naicheng Wu, Björn Guse, Kristė Makarevičiūtė, Xiuming Sun, and Nicola Fohrer. 2019. “Riverine Phytoplankton Functional Groups Response to Multiple Stressors Variously Depending on Hydrological Periods.” Ecological Indicators 101: 41–49.</p>
+<p>Wu, Naicheng, Yueming Qu, Björn Guse, Kristė Makarevičiūtė, Szewing To, Tenna Riis, and Nicola Fohrer. 2018. “Hydrological and Environmental Variables Outperform Spatial Factors in Structuring Species, Trait Composition, and Beta Diversity of Pelagic Algae.” Ecology and Evolution 8 (5): 2947–61.</p>
+<p>Wu, Naicheng, Hans Thodsen, Hans Estrup Andersen, Henrik Tornbjerg, Annette Baattrup-Pedersen, and Tenna Riis. 2019. “Flow Regimes Filter Species Traits of Benthic Diatom Communities and Modify the Functional Features of Lowland Streams-a Nationwide Scale Study.” Science of the Total Environment 651: 357–66.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
+>>>>>>> 3c0cf6a22549acab97984220652a4e3407f6d8c2
