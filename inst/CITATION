@@ -1,0 +1,15 @@
+citHeader("To cite the SER package in publications please use:")
+
+citEntry(entry="Article",
+         title = "Short-period Environmental Regime (SER)",
+         author = personList(person("Kun", "Guo", email="kunguo15@gmail.com"),
+         person("Naicheng", "Wu", email="naichengwu88@gmail.com"),
+         person("Tenna", "Riis", email="tenna.riis@bios.au.dk")),
+ journal="Unpublished",
+ year="2019",
+ volume="",
+ pages="",
+ note="Unpublished",
+
+ textVersion="Kun Guo, Naicheng Wu and Tenna Riis (2019). Short-period Environmental Regime (SER).https://github.com/kun-ecology/SER.")
+
