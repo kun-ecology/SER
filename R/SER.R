@@ -10,6 +10,9 @@
 #' # inspect the discharge data
 #' str(hydro_df)
 #'
+#' # make sure name of the column with data (in this case Discharge) is "Env"
+#' names(hydro_df)[2] <- "Env"
+#'
 #' # inspect the sample date data
 #' str(sample_date)
 #'
@@ -89,7 +92,7 @@ SER <- function(Env_data,sample_date,days_bf=NULL){
     lapply(function(x)do.call(rbind,x)) %>%
     do.call(rbind,.)
   SER_res_f <- mutate(SER_res,SampleDate=stringr::word(row.names(SER_res),1,sep="\\."),
-                      SER_Indice=substr(row.names(SER_res),12,length(row.names(SER_res))))
+                      SER_Indice=substr(row.names(SER_res),12,nchar(row.names(SER_res))))
   SER_res_f <- SER_res_f[,c(2,3,1)] # rearrange dataframe
   SER_res_f$SER_Indice <- factor(SER_res_f$SER_Indice,levels = unique(SER_res_f$SER_Indice))
   SER_res_f <- spread(SER_res_f, SER_Indice, Value) #convert data to wide data format
