@@ -23,6 +23,9 @@ Short-period Environmental Regime (SER)
 # inspect the discharge data
 str(hydro_df)
 
+# make sure name of the column with data (in this case Discharge) is "Env"
+names(hydro_df)[2] <- "Env"
+
 # inspect the sample date data
 str(sample_date)
 
