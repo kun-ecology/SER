@@ -1,5 +1,5 @@
 # SER
-A R package **SER** for calulating _Short-period Environmental Regime (SER)_
+An R package **SER** for calulating _Short-period Environmental Regime (SER)_
 
 # Install the package
 
