@@ -31,6 +31,13 @@ SER <- function(Env_data, sample_date, days_bf=NULL, type = NULL,
                 include_sample.date = FALSE,
                 include_successive = FALSE,
                 simiplify = TRUE){
+
+  # required packages
+  require(tidyr)
+  require(dplyr)
+  require(purrr)
+  require(lubridate)
+
   date.vector <- Env_data$Date
   env.vector <- Env_data$Env
 
