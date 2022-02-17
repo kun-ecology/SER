@@ -4,11 +4,13 @@
 \name{hydro_df}
 \alias{hydro_df}
 \title{Discharge data in a stream}
-\format{A dataframe
+\format{
+A dataframe
    \describe{
       \item{Date}{Date data, from 2016 to 2018}
       \item{Discharge}{Discharge data (L/s), daily discharge data in a stream}
-   }}
+   }
+}
 \source{
 
 }

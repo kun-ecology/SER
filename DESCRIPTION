@@ -4,15 +4,17 @@ Title: Short-period Environmental Regime
 Version: 0.0
 Author: Kun Guo <kunguo16@gmail.com>, Naicheng Wu <naichengwu88@gmail.com>, and Tenna Riis <tenna.riis@bios.au.dk>
 Maintainer: Kun Guo <kunguo16@gmail.com>
-Description: 1. Currently, this package only contain 1 function, which can calculate short-period environmental regime (SER).
+Description: 1. Currently, this package only contain 1 function, which can calculate short-period (day-, month-, or year- specific) environmental regime (SER).
     2. A tutorial is availiable for how short-period environmental regime is developed and how it can be applied for different types of data.
 License: GPL
 Encoding: UTF-8
 LazyData: true
 Imports:
     dplyr,
+    purrr,
+    tidyr,
     lubridate
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.2
 Suggests: 
     knitr,
     rmarkdown

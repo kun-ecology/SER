@@ -2,7 +2,11 @@
 #'
 #' @param Env_data: time series environmental data, a dataframe with columns Date and Env, make sure Date is in date format while Env is in numeric format.
 #' @param sample_date: sampling dates, a vector containing sampling days. Date for initiation of the experiment (measurements) should be included as the first element of the vector.
-#' @param days_bf:  N days before the sampling date (not included); by default, days_bf = c(days between two successive sampling dates)
+#' @param days_bf: a numeric vector representing N days (months or years) before the sampling date; if days_bf = NULL (by default), then it days_bf = days between two successive sampling dates
+#' @param type: a character vector indicating whether the 'days_bf' is "day", "month", or "year" specific.
+#' @param include_sample.date: TRUE or FALSE (by default) indicates whether environmental data at sample.date is included during the calculation.
+#' @param include_successive: TRUE or FALS (by default) indicates whether environmental data between two successive sampling dates is used for calculating 'BetwSamT' environmental regime.
+#' @param simiplify: TRUE (by default) or FALSE indicates whether the simplified result is returned. Set simplify = TRUE if you want to check the intermediate results.
 #'
 #' @return a data frame
 #' @export
@@ -23,41 +27,114 @@
 #'
 #'
 
-SER <- function(Env_data,sample_date,days_bf=NULL){
+SER <- function(Env_data, sample_date, days_bf=NULL, type = NULL,
+                include_sample.date = FALSE,
+                include_successive = FALSE,
+                simiplify = TRUE){
   date.vector <- Env_data$Date
   env.vector <- Env_data$Env
-  # construct date interval based on different sample date
-  sample_interval <-list() # initiate a list for storing interested time period
-  if (is.null(days_bf)){
-    for (i in 2:length(sample_date)) {
-      # default interested time period: days between two successive sampling dates
-      sample_interval[[i-1]] <- c(interval(sample_date[i-1],sample_date[i]-days(1))) }
-  } else {
-    days_bf <- days_bf
-    for (i in 2:length(sample_date)) {
-      # days between two successive sampling dates are automatically added to argument days_bf
-      days_bf.interval <- interval(sample_date[i]-lapply(days_bf,days) %>% reduce(c), sample_date[i]-days(1))
-      sample_interval[[i-1]] <- c(days_bf.interval,interval(sample_date[i-1],sample_date[i]-days(1)))  }
+
+  # should sample.date be included? by default, NO
+  # should days between two successive sample dates be included? by default, NO
+
+  #####################
+  # step1
+  # initialize type (day, month, year)
+  type <- ifelse(is.null(type), "day", type)
+  # check if type if one of day, month, or year
+  if (!(type %in% c("day", "month", "year")) ){
+    stop ("type mush be one of 'day', 'month', 'year' ")
   }
 
-  #construct env data based on sample_interval
-  Env_df.ls <- lapply(sample_interval,function(x){
-    lapply(x,function(i){
-      env.vector[date.vector %within% i]
-    })
-  })
+  # type name
+  type.nm <- switch(type,
+                    "day" = "d",
+                    "month" = "m",
+                    "year" = "y")
 
-  #set names to Env_df data
-  names(Env_df.ls) <- as.character(sample_date[-1])
-  if (length(Env_df.ls[[1]])==1){
-    Env_df.ls <- lapply(Env_df.ls,function(x)set_names(x,"BetwSamT"))
-  } else {
-    Env_df.ls <- lapply(Env_df.ls,function(x)set_names(x,c(paste0("Bfor_",days_bf,"d"),"BetwSamT")))
+  # type function
+  # exclude the sample date itself
+  type <- switch(type,
+                 "day" = "days",
+                 "month" = "months",
+                 "year" = "years")
+  type.fun <- match.fun(type)
+
+
+
+  #####################
+  #step2
+  # initialize days_bf
+
+  ############
+  # step2.1, time intervals between two successive sample dates
+  # start date
+  tmp1 <- sample_date[-length(sample_date)]
+
+  # end date
+  tmp2 <- sample_date[-1]
+
+  if (!include_sample.date){
+    tmp2 <- tmp2 - type.fun(1)
   }
 
-  ####calculate 10%, 25%, 75% and 95% percentiles of entire Env_data
+  # intervals
+  default.intv  <- map2(tmp1, tmp2, ~ interval(.x, .y))
+  default.intv <- reduce(default.intv, c)
+
+  names(default.intv) <- rep("BetwSamT", length(tmp2))
+
+  default.intv <- tibble(sample_date = tmp2,
+                         regime_indice=rep("BetwSamT", length(tmp1)),
+                         date_diff = as.numeric(tmp2 - tmp1),
+                         start_date=tmp1,
+                         end_date=tmp2,
+                         intv=default.intv)
+  ########
+  # step2.2, construct intervals
+
+  if (is.null(days_bf)) {
+    sample_interval <- default.intv
+
+  } else {
+    sample_interval <- tibble(sample_date = rep(tmp2, each=length(days_bf)),
+                              date_diff = rep(days_bf, length(tmp2)),
+    ) %>%
+      # start date for each of days_bf
+      mutate(start_date = map2(sample_date, date_diff, ~ .x - type.fun(.y -1)) %>% reduce(c)) %>%
+      # end date for each days_bf
+      mutate(end_date = sample_date) %>%
+      # time interval
+      mutate(intv=map2(start_date, end_date, ~ interval(.x, .y))%>% reduce(c)) %>%
+      # regime indice
+      mutate(regime_indice = rep(paste0("Bfor_", days_bf, type.nm), length(tmp2)) ) %>%
+      select(sample_date, regime_indice, date_diff, start_date, end_date, intv)
+
+    # # shall default.intv be included
+    if (include_successive) {
+      sample_interval <- rbind(sample_interval, default.intv)
+    }
+
+    # convert sample date back to true sample date
+    if (!include_sample.date){
+      sample_interval <- sample_interval %>%
+        mutate(sample_date = sample_date + type.fun(1))
+    }
+
+  }
+
+  ###################
+  # step 3.0
+  # construct env data based on sample_interval
+  env_df.ls <- sample_interval %>%
+    mutate(date_df=map(intv, ~ date.vector[date.vector %within% .x]),
+           env_df=map(intv, ~ env.vector[date.vector %within% .x]))
+
+  # step 3.1
+  # calculate 10%, 25%, 75% and 95% percentiles of entire Env_data
   percentiles <- quantile(env.vector, probs = c(0.1,0.25,0.75,0.9), type = 6, names = F)
   names(percentiles) <- c("10%",  "25%", "75%",  "90%")
+
 
   calc_SER <- function (env.vec) {
     meanFlow <- mean(env.vec)
@@ -83,21 +160,29 @@ SER <- function(Env_data,sample_date,days_bf=NULL){
     RH1 <- sum(change.rate>0)
 
     SER_res <-  data.frame(Value = c(MA1,MA2, MA3, MA4, ML1, MH1, EL1, EH1, RC, RL1, RH1))
-    row.names(SER_res)= c("MA1","MA2", "MA3", "MA4", "ML1", "MH1", "EL1","EH1", "RC", "RL1",  "RH1")
-    SER_res$Value <- round(SER_res$Value , digits = 3)
+    SER_res <- t(SER_res) %>% as.data.frame()
+    names(SER_res)= c("MA1","MA2", "MA3", "MA4", "ML1", "MH1", "EL1","EH1", "RC", "RL1",  "RH1")
     return(SER_res)
 
   }
-  SER_res <- lapply(Env_df.ls,function(x)lapply(x,calc_SER)) %>%
-    lapply(function(x)do.call(rbind,x)) %>%
-    do.call(rbind,.)
-  SER_res_f <- mutate(SER_res,SampleDate=stringr::word(row.names(SER_res),1,sep="\\."),
-                      SER_Indice=substr(row.names(SER_res),12,nchar(row.names(SER_res))))
-  SER_res_f <- SER_res_f[,c(2,3,1)] # rearrange dataframe
-  SER_res_f$SER_Indice <- factor(SER_res_f$SER_Indice,levels = unique(SER_res_f$SER_Indice))
-  SER_res_f <- spread(SER_res_f, SER_Indice, Value) #convert data to wide data format
-  row.names(SER_res_f) <- NULL
-  return(SER_res_f)
+
+  # step 4
+  res_df <- env_df.ls %>%
+    mutate(regime_df=map(env_df, ~ calc_SER(.x)))
+
+  # simplified results
+  if (simiplify){
+    res_df <- res_df %>%
+      select(sample_date, regime_indice, regime_df) %>%
+      unnest(regime_df) %>%
+      pivot_longer(cols = 3:13, names_to = "ind", values_to = "val") %>%
+      mutate(regime_indice=paste0(regime_indice, ".", ind)) %>%
+      select(-ind) %>%
+      pivot_wider(id_cols = sample_date, names_from = regime_indice, values_from = val)
+  }
+
+  return(res_df)
 }
+
 
 

@@ -4,14 +4,30 @@
 \alias{SER}
 \title{Short-period Environmental Regime (SER)}
 \usage{
-SER(Env_data, sample_date, days_bf = NULL)
+SER(
+  Env_data,
+  sample_date,
+  days_bf = NULL,
+  type = NULL,
+  include_sample.date = FALSE,
+  include_successive = FALSE,
+  simiplify = TRUE
+)
 }
 \arguments{
 \item{Env_data:}{time series environmental data, a dataframe with columns Date and Env, make sure Date is in date format while Env is in numeric format.}
 
 \item{sample_date:}{sampling dates, a vector containing sampling days. Date for initiation of the experiment (measurements) should be included as the first element of the vector.}
 
-\item{days_bf:}{N days before the sampling date (not included); by default, days_bf = c(days between two successive sampling dates)}
+\item{days_bf:}{a numeric vector representing N days (months or years) before the sampling date; if days_bf = NULL (by default), then it days_bf = days between two successive sampling dates}
+
+\item{type:}{a character vector indicating whether the 'days_bf' is "day", "month", or "year" specific.}
+
+\item{include_sample.date:}{TRUE or FALSE (by default) indicates whether environmental data at sample.date is included during the calculation.}
+
+\item{include_successive:}{TRUE or FALS (by default) indicates whether environmental data between two successive sampling dates is used for calculating 'BetwSamT' environmental regime.}
+
+\item{simiplify:}{TRUE (by default) or FALSE indicates whether the simplified result is returned. Set simplify = TRUE if you want to check the intermediate results.}
 }
 \value{
 a data frame

@@ -4,7 +4,9 @@
 \name{sample_date}
 \alias{sample_date}
 \title{Sample dates (vector)}
-\format{A vector containg 13 dates data}
+\format{
+A vector containg 13 dates data
+}
 \usage{
 sample_date
 }
