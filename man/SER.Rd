@@ -45,10 +45,32 @@ names(hydro_df)[2] <- "Env"
 # inspect the sample date data
 str(sample_date)
 
+#############
+#day- specific SER
 # calculate short-period hydrological indices
-hydro_ser <- SER(hydro_df,sample_date,days_bf = NULL)
-str(hydro_ser)
-head(hydro_ser)
+SER(hydro_df,sample_date)
+SER(hydro_df,sample_date, days_bf=c(3,7,14))
+SER(hydro_df,sample_date, days_bf=c(3,7,14), include_sample.date = T)
+SER(hydro_df,sample_date, days_bf=c(3,7,14), include_successive = T)
+SER(hydro_df,sample_date, days_bf=c(3,7,14), include_sample.date = T, include_successive = T)
 
+##################
+# month-specific SER
+# only include the first and last dates in sample_dates
+test.date.m <- sample_date[c(1, 13)]
+SER(hydro_df, test.date.m, days_bf = NULL, type = "month")
+SER(hydro_df, test.date.m, days_bf = c(2, 4, 6), type = "month", include_sample.date = T)
+SER(hydro_df, test.date.m, days_bf = c(2, 4, 6), type = "month", include_successive = T)
+SER(hydro_df, test.date.m, days_bf = c(2, 4, 6), type = "month", include_sample.date = T, include_successive = T)
 
+##################
+# year-specific SER
+# generate data for testing
+test.df <- data.frame(Date = seq(ymd("2010-1-1"), ymd("2020-1-1"), by="1 day"),
+                      Env = sample(hydro_df$Env, 3653, replace = T))
+test.date.y <-  seq(ymd("2012-1-1"), ymd("2020-1-1"), by="2 year")
+SER(test.df, test.date.y, days_bf = NULL, type = "year")
+SER(test.df, test.date.y, days_bf = c(2), type = "year", include_sample.date = T)
+SER(test.df, test.date.y, days_bf = c(2), type = "year", include_successive = T)
+SER(test.df, test.date.y, days_bf = c(2), type = "year", include_successive = T, include_sample.date = T)
 }
