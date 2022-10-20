@@ -11,6 +11,9 @@ A dataframe
       \item{Discharge}{Discharge data (L/s), daily discharge data in a stream}
    }
 }
+\source{
+random geneated
+}
 \usage{
 hydro_df
 }

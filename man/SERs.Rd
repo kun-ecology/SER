@@ -37,7 +37,7 @@ Short-period environmental regime for multiple environmental measurements
 }
 \examples{
 # generate a df.ls
-df.ls <- list(env1 = hydro_df, env2 = hydro_df[sample(1:nrow(hydro_df), nrow(hydro_df), replace = F), ])
+df.ls <- list(env1 = hydro_df, env2 = hydro_df[sample(1:nrow(hydro_df), nrow(hydro_df), replace = FALSE), ])
 
 # generate a date.ls
 date.ls <- list(dt1 = sample_date, dt2 = sample_date[1:6])

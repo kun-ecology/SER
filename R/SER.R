@@ -1,12 +1,18 @@
 #' Short-period Environmental Regime (SER)
 #'
-#' @param Env_data: time series environmental data, a dataframe with columns Date and Env, make sure Date is in date format while Env is in numeric format.
-#' @param sample_date: sampling dates, a vector containing sampling days. Date for initiation of the experiment (measurements) should be included as the first element of the vector.
-#' @param days_bf: a numeric vector representing N days (months or years) before the sampling date; if days_bf = NULL (by default), then days_bf = days between two successive sampling dates
+#' @param Env_data: time series environmental data, a dataframe with columns Date and Env,
+#' make sure Date is in date format while Env is in numeric format.
+#' @param sample_date: sampling dates, a vector containing sampling days.
+#' Date for initiation of the experiment (measurements) should be included as the first element of the vector.
+#' @param days_bf: a numeric vector representing N days (months or years) before the sampling date;
+#' if days_bf = NULL (by default), then days_bf = days between two successive sampling dates
 #' @param type: a character vector indicating whether the 'days_bf' is "day", "month", or "year" specific.
-#' @param include_sample.date: TRUE or FALSE (by default) indicates whether environmental data at sample.date is included during the calculation.
-#' @param include_successive: TRUE or FALS (by default) indicates whether environmental data between two successive sampling dates is used for calculating 'BetwSamT' environmental regime.
-#' @param simiplify: TRUE (by default) or FALSE indicates whether the simplified result is returned. Set simplify = TRUE if you want to check the intermediate results.
+#' @param include_sample.date: TRUE or FALSE (by default) indicates whether environmental data
+#'  at sample.date is included during the calculation.
+#' @param include_successive: TRUE or FALS (by default) indicates whether environmental data
+#' between two successive sampling dates is used for calculating 'BetwSamT' environmental regime.
+#' @param simiplify: TRUE (by default) or FALSE indicates whether the simplified result is returned.
+#'  Set simplify = TRUE if you want to check the intermediate results.
 #'
 #' @return a data frame
 #' @export
@@ -25,29 +31,29 @@
 #' # calculate short-period hydrological indices
 #' SER(hydro_df,sample_date)
 #' SER(hydro_df,sample_date, days_bf=c(3,7,14))
-#' SER(hydro_df,sample_date, days_bf=c(3,7,14), include_sample.date = T)
-#' SER(hydro_df,sample_date, days_bf=c(3,7,14), include_successive = T)
-#' SER(hydro_df,sample_date, days_bf=c(3,7,14), include_sample.date = T, include_successive = T)
+#' SER(hydro_df,sample_date, days_bf=c(3,7,14), include_sample.date = TRUE)
+#' SER(hydro_df,sample_date, days_bf=c(3,7,14), include_successive = TRUE)
+#' SER(hydro_df,sample_date, days_bf=c(3,7,14), include_sample.date = TRUE, include_successive = TRUE)
 #'
 #'##################
 #' # month-specific SER
 #' # only include the first and last dates in sample_dates
 #' test.date.m <- sample_date[c(1, 13)]
 #' SER(hydro_df, test.date.m, days_bf = NULL, type = "month")
-#' SER(hydro_df, test.date.m, days_bf = c(2, 4, 6), type = "month", include_sample.date = T)
-#' SER(hydro_df, test.date.m, days_bf = c(2, 4, 6), type = "month", include_successive = T)
-#' SER(hydro_df, test.date.m, days_bf = c(2, 4, 6), type = "month", include_sample.date = T, include_successive = T)
+#' SER(hydro_df, test.date.m, days_bf = c(2, 4, 6), type = "month", include_sample.date = TRUE)
+#' SER(hydro_df, test.date.m, days_bf = c(2, 4, 6), type = "month", include_successive = TRUE)
+#' SER(hydro_df, test.date.m, days_bf = c(2, 4, 6), type = "month", include_sample.date = TRUE, include_successive = TRUE)
 #'
 #'##################
 #' # year-specific SER
 #' # generate data for testing
 #' test.df <- data.frame(Date = seq(ymd("2010-1-1"), ymd("2020-1-1"), by="1 day"),
-#'                       Env = sample(hydro_df$Env, 3653, replace = T))
+#'                       Env = sample(hydro_df$Env, 3653, replace = TRUE))
 #' test.date.y <-  seq(ymd("2012-1-1"), ymd("2020-1-1"), by="2 year")
 #' SER(test.df, test.date.y, days_bf = NULL, type = "year")
-#' SER(test.df, test.date.y, days_bf = c(2), type = "year", include_sample.date = T)
-#' SER(test.df, test.date.y, days_bf = c(2), type = "year", include_successive = T)
-#' SER(test.df, test.date.y, days_bf = c(2), type = "year", include_successive = T, include_sample.date = T)
+#' SER(test.df, test.date.y, days_bf = c(2), type = "year", include_sample.date = TRUE)
+#' SER(test.df, test.date.y, days_bf = c(2), type = "year", include_successive = TRUE)
+#' SER(test.df, test.date.y, days_bf = c(2), type = "year", include_successive = TRUE, include_sample.date = TRUE)
 
 SER <- function(Env_data, sample_date, days_bf=NULL, type = NULL,
                 include_sample.date = FALSE,
@@ -232,7 +238,7 @@ SER <- function(Env_data, sample_date, days_bf=NULL, type = NULL,
 #'
 #' @examples
 #' # generate a df.ls
-#' df.ls <- list(env1 = hydro_df, env2 = hydro_df[sample(1:nrow(hydro_df), nrow(hydro_df), replace = F), ])
+#' df.ls <- list(env1 = hydro_df, env2 = hydro_df[sample(1:nrow(hydro_df), nrow(hydro_df), replace = FALSE), ])
 #'
 #' # generate a date.ls
 #' date.ls <- list(dt1 = sample_date, dt2 = sample_date[1:6])
