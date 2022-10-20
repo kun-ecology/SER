@@ -42,6 +42,6 @@ df.ls <- list(env1 = hydro_df, env2 = hydro_df[sample(1:nrow(hydro_df), nrow(hyd
 # generate a date.ls
 date.ls <- list(dt1 = sample_date, dt2 = sample_date[1:6])
 
-# calculate the SER
+# calculate SER
 (SERs(df.ls, date.ls))
 }

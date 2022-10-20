@@ -243,7 +243,7 @@ SER <- function(Env_data, sample_date, days_bf=NULL, type = NULL,
 #' # generate a date.ls
 #' date.ls <- list(dt1 = sample_date, dt2 = sample_date[1:6])
 #'
-#' # calculate the SER
+#' # calculate SER
 #' (SERs(df.ls, date.ls))
 SERs <- function(df.ls,
                  date.ls,
@@ -252,7 +252,8 @@ SERs <- function(df.ls,
                  include_sample.date = FALSE,
                  include_successive = FALSE,
                  simiplify = TRUE) {
-  res_df <- map2(df.ls, date.ls, function(df, dt) {
+
+  res_df <- purrr::map2(df.ls, date.ls, function(df, dt) {
     SER(
       df,
       dt,
