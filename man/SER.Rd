@@ -19,7 +19,7 @@ SER(
 
 \item{sample_date:}{sampling dates, a vector containing sampling days. Date for initiation of the experiment (measurements) should be included as the first element of the vector.}
 
-\item{days_bf:}{a numeric vector representing N days (months or years) before the sampling date; if days_bf = NULL (by default), then it days_bf = days between two successive sampling dates}
+\item{days_bf:}{a numeric vector representing N days (months or years) before the sampling date; if days_bf = NULL (by default), then days_bf = days between two successive sampling dates}
 
 \item{type:}{a character vector indicating whether the 'days_bf' is "day", "month", or "year" specific.}
 

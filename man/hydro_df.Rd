@@ -11,9 +11,6 @@ A dataframe
       \item{Discharge}{Discharge data (L/s), daily discharge data in a stream}
    }
 }
-\source{
-
-}
 \usage{
 hydro_df
 }

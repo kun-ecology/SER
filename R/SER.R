@@ -2,7 +2,7 @@
 #'
 #' @param Env_data: time series environmental data, a dataframe with columns Date and Env, make sure Date is in date format while Env is in numeric format.
 #' @param sample_date: sampling dates, a vector containing sampling days. Date for initiation of the experiment (measurements) should be included as the first element of the vector.
-#' @param days_bf: a numeric vector representing N days (months or years) before the sampling date; if days_bf = NULL (by default), then it days_bf = days between two successive sampling dates
+#' @param days_bf: a numeric vector representing N days (months or years) before the sampling date; if days_bf = NULL (by default), then days_bf = days between two successive sampling dates
 #' @param type: a character vector indicating whether the 'days_bf' is "day", "month", or "year" specific.
 #' @param include_sample.date: TRUE or FALSE (by default) indicates whether environmental data at sample.date is included during the calculation.
 #' @param include_successive: TRUE or FALS (by default) indicates whether environmental data between two successive sampling dates is used for calculating 'BetwSamT' environmental regime.
@@ -70,7 +70,7 @@ SER <- function(Env_data, sample_date, days_bf=NULL, type = NULL,
   # step1
   # initialize type (day, month, year)
   type <- ifelse(is.null(type), "day", type)
-  # check if type if one of day, month, or year
+  # check if type is one of day, month, or year
   if (!(type %in% c("day", "month", "year")) ){
     stop ("type mush be one of 'day', 'month', 'year' ")
   }
@@ -214,4 +214,49 @@ SER <- function(Env_data, sample_date, days_bf=NULL, type = NULL,
 }
 
 
+
+#################
+
+#' Short-period environmental regime for multiple environmental measurements
+#'
+#' @param df.ls a list containing several dataframes. Please see the help of SER for the requirements of each dataframe in the list.
+#' @param date.ls a list containing sampling dates for each dataframe in df.ls.
+#' @param days_bf see the help of SER.
+#' @param type see the help of SER.
+#' @param include_sample.date see the help of SER.
+#' @param include_successive see the help of SER.
+#' @param simiplify see the help of SER.
+#'
+#' @return a list containing SER for each dataframes and corresponding sampling dates.
+#' @export
+#'
+#' @examples
+#' # generate a df.ls
+#' df.ls <- list(env1 = hydro_df, env2 = hydro_df[sample(1:nrow(hydro_df), nrow(hydro_df), replace = F), ])
+#'
+#' # generate a date.ls
+#' date.ls <- list(dt1 = sample_date, dt2 = sample_date[1:6])
+#'
+#' # calculate the SER
+#' (SERs(df.ls, date.ls))
+SERs <- function(df.ls,
+                 date.ls,
+                 days_bf = NULL,
+                 type = NULL,
+                 include_sample.date = FALSE,
+                 include_successive = FALSE,
+                 simiplify = TRUE) {
+  res_df <- map2(df.ls, date.ls, function(df, dt) {
+    SER(
+      df,
+      dt,
+      days_bf = days_bf,
+      type = type,
+      include_sample.date = include_sample.date,
+      include_successive = include_successive,
+      simiplify = simiplify
+    )
+  })
+
+}
 
