@@ -24,7 +24,7 @@ There are two datasets embeded in the package: _hydro_df_, a dataframe, containi
 
 Below is how the main function _SER_ works with the demo data:
 
-`SER(hydro_df,sample_date)`
+`SER(hydro_df$Date, hydro_df$Discharge, sample_date)`
 
 We highly recommend you read through the tutorial and then define your own short-period environmental indices.
 
