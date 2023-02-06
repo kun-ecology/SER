@@ -9,13 +9,18 @@ Description: 1. Currently, this package only contain 1 function, which can calcu
 License: GPL
 Encoding: UTF-8
 LazyData: true
-Imports:
-    tidyverse,
-    kableExtra,
+RoxygenNote: 7.2.3
+VignetteBuilder: knitr, kableExtra, rmarkdown
+Depends: 
+    dplyr,
     lubridate,
-    purrr
-RoxygenNote: 7.2.1
-Suggests: 
-    knitr,
+    purrr,
+    tidyr, 
+    tibble
+Suggests:
+    knitr, 
+    kableExtra, 
     rmarkdown
-VignetteBuilder: knitr
+
+
+    

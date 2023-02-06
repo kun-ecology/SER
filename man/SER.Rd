@@ -5,48 +5,50 @@
 \title{Short-period Environmental Regime (SER)}
 \usage{
 SER(
-  Env_data,
+  env_date,
+  env_val,
   sample_date,
   days_bf = NULL,
   type = NULL,
   include_sample.date = FALSE,
   include_successive = FALSE,
-  simiplify = TRUE
+  simplify = TRUE
 )
 }
 \arguments{
-\item{Env_data:}{time series environmental data, a dataframe with columns Date and Env,
-make sure Date is in date format while Env is in numeric format.}
+\item{env_date}{a vector containing dates that a environmental variables were measured, make sure it is in date format before passing it to the function}
 
-\item{sample_date:}{sampling dates, a vector containing sampling days.
-Date for initiation of the experiment (measurements) should be included as the first element of the vector.}
+\item{env_val}{a vector containing environmental values for corresponding dates in **env_date**,  make sure it is in numeric format}
 
-\item{days_bf:}{a numeric vector representing N days (months or years) before the sampling date;
-if days_bf = NULL (by default), then days_bf = days between two successive sampling dates}
+\item{sample_date}{a vector containing days for biological sampling date for initiation of the experiment (measurements) should be included as the first element of the vector, and also make sure it is in date format}
 
-\item{type:}{a character vector indicating whether the 'days_bf' is "day", "month", or "year" specific.}
+\item{days_bf}{a numeric vector representing N days (months or years) before the sampling date; if days_bf = NULL (by default), then days_bf = days (months/years) between two successive sampling dates}
 
-\item{include_sample.date:}{TRUE or FALSE (by default) indicates whether environmental data
-at sample.date is included during the calculation.}
+\item{type}{a character vector indicating whether the 'days_bf' is "day", "month", or "year" specific}
 
-\item{include_successive:}{TRUE or FALS (by default) indicates whether environmental data
-between two successive sampling dates is used for calculating 'BetwSamT' environmental regime.}
+\item{include_sample.date}{TRUE or FALSE (by default), indicates whether environmental data at sample.date is included or not during the calculation}
 
-\item{simiplify:}{TRUE (by default) or FALSE indicates whether the simplified result is returned.
-Set simplify = TRUE if you want to check the intermediate results.}
+\item{include_successive}{TRUE or FALSE (by default), indicates whether environmental data between two successive sampling dates is used for calculating 'BetwSamT' environmental regime}
+
+\item{simplify}{TRUE (by default) or FALSE, indicates whether the simplified result is returned. Set simplify = TRUE if you want to check the intermediate results}
 }
 \value{
-a data frame
+a data frame with the first column as the sampling date(s), whereas the rest columns are calculated indices.
 }
 \description{
 Short-period Environmental Regime (SER)
 }
+\details{
+SER is extremely useful in linking time-series environmental variables to discrete biological responses. Specifically, SER function summaries
+time-series environmental variables into indices covering different facets i.e., magnitude, frequency, and rate of change of the data in any focused period,
+which are typically masked by using simple average or median values in conventional way. In total, 11 elementary indices were developed, and users can developed
+their own environmental regimes by changing the argument **days_bf**. Besides, it is recommended that users carefully read the vignette and check published studies (Guo et al. 2021, 2022; Wu et al. 2022)
+that used SER to make most out of your own data set with this package.
+}
 \examples{
+
 # inspect the discharge data
 str(hydro_df)
-
-# make sure name of the column with data (in this case Discharge) is "Env"
-names(hydro_df)[2] <- "Env"
 
 # inspect the sample date data
 str(sample_date)
@@ -54,29 +56,36 @@ str(sample_date)
 #############
 #day- specific SER
 # calculate short-period hydrological indices
-SER(hydro_df,sample_date)
-SER(hydro_df,sample_date, days_bf=c(3,7,14))
-SER(hydro_df,sample_date, days_bf=c(3,7,14), include_sample.date = TRUE)
-SER(hydro_df,sample_date, days_bf=c(3,7,14), include_successive = TRUE)
-SER(hydro_df,sample_date, days_bf=c(3,7,14), include_sample.date = TRUE, include_successive = TRUE)
+SER(hydro_df$Date, hydro_df$Discharge, sample_date)
+SER(hydro_df$Date, hydro_df$Discharge, sample_date, days_bf=c(3,7,14))
+SER(hydro_df$Date, hydro_df$Discharge, sample_date, days_bf=c(3,7,14), include_sample.date = TRUE)
+SER(hydro_df$Date, hydro_df$Discharge, sample_date, days_bf=c(3,7,14), include_successive = TRUE)
+SER(hydro_df$Date, hydro_df$Discharge, sample_date, days_bf=c(3,7,14),
+include_sample.date = TRUE, include_successive = TRUE)
 
 ##################
 # month-specific SER
 # only include the first and last dates in sample_dates
 test.date.m <- sample_date[c(1, 13)]
-SER(hydro_df, test.date.m, days_bf = NULL, type = "month")
-SER(hydro_df, test.date.m, days_bf = c(2, 4, 6), type = "month", include_sample.date = TRUE)
-SER(hydro_df, test.date.m, days_bf = c(2, 4, 6), type = "month", include_successive = TRUE)
-SER(hydro_df, test.date.m, days_bf = c(2, 4, 6), type = "month", include_sample.date = TRUE, include_successive = TRUE)
+SER(hydro_df$Date, hydro_df$Discharge, test.date.m, days_bf = NULL, type = "month")
+SER(hydro_df$Date, hydro_df$Discharge, test.date.m, days_bf = c(2, 4, 6),
+type = "month", include_sample.date = TRUE)
+SER(hydro_df$Date, hydro_df$Discharge, test.date.m, days_bf = c(2, 4, 6),
+ type = "month", include_successive = TRUE)
+SER(hydro_df$Date, hydro_df$Discharge, test.date.m, days_bf = c(2, 4, 6),
+type = "month", include_sample.date = TRUE, include_successive = TRUE)
 
 ##################
 # year-specific SER
 # generate data for testing
 test.df <- data.frame(Date = seq(ymd("2010-1-1"), ymd("2020-1-1"), by="1 day"),
-                      Env = sample(hydro_df$Env, 3653, replace = TRUE))
+                      Env = sample( hydro_df$Discharge, 3653, replace = TRUE))
 test.date.y <-  seq(ymd("2012-1-1"), ymd("2020-1-1"), by="2 year")
-SER(test.df, test.date.y, days_bf = NULL, type = "year")
-SER(test.df, test.date.y, days_bf = c(2), type = "year", include_sample.date = TRUE)
-SER(test.df, test.date.y, days_bf = c(2), type = "year", include_successive = TRUE)
-SER(test.df, test.date.y, days_bf = c(2), type = "year", include_successive = TRUE, include_sample.date = TRUE)
+SER(test.df$Date, test.df$Env, test.date.y, days_bf = NULL, type = "year")
+SER(test.df$Date, test.df$Env, test.date.y, days_bf = c(2),
+type = "year", include_sample.date = TRUE)
+SER(test.df$Date, test.df$Env, test.date.y, days_bf = c(2),
+type = "year", include_successive = TRUE)
+SER(test.df$Date, test.df$Env, test.date.y, days_bf = c(2), type = "year",
+include_successive = TRUE, include_sample.date = TRUE)
 }
