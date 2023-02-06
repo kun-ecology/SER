@@ -105,7 +105,7 @@ head(hydro_ser)
 ```
 
 # Summary
-* In short, by summaries time-series environmental variables into indices covering different facets i.e., magnitude, frequency, and rate of change of time-series data in any focused period, which are typically masked by using simple average or median values in conventional way, _SER_ helps linking time-series environmental data to discrete biological sampling. Here, we only used stream discharge data to estimate short-period hydrological regime, but other types of environmental data e.g., nutrient concentration, light, dissolved oxygen and etc can also be used to develop case-specific environmental regime. Besides, two studies (Guo et al. 2020, 2021; Wu et al. 2022) using SER have been published, you may check them for how to interpret these calculated indices and how to include them in following-up analyses.
+* In short, by summarizing time-series environmental variables into indices covering different facets i.e., magnitude, frequency, and rate of change of time-series data in any focused period, which are typically masked by using simple average or median values in conventional way, _SER_ helps linking time-series environmental data to discrete biological sampling. Here, we only used stream discharge data to estimate short-period hydrological regime, but other types of environmental data e.g., nutrient concentration, light, dissolved oxygen and etc can also be used to develop case-specific environmental regime. Besides, two studies (Guo et al. 2020, 2021; Wu et al. 2022) using SER have been published, you may check them for how to interpret these calculated indices and how to include them in following-up analyses.
 
 
 # References
