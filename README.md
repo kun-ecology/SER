@@ -29,15 +29,18 @@ Below is how the main function _SER_ works with the demo data:
 We highly recommend you read through the tutorial and then define your own short-period environmental indices.
 
 **NOTES**
-+ This is the first version of the package, there might be some bugs. 
-
-+ In addition, more features are under development.
-
-+ We are more than welcome to your feedbacks/suggestions.
++ SER is extremely useful in linking time-series environmental variables to discrete biological responses. Specifically, SER function summaries time-series environmental variables into indices covering different facets i.e., magnitude, frequency, and rate of change of the data in any focused period, which are typically masked by using simple average or median values in conventional way. In total, 11 elementary indices were developed, and users can developed their own environmental regimes by changing the argument **days_bf**. Besides, it is recommended that users carefully read the vignette and check published studies (Guo et al. 2020, 2021; Wu et al. 2022) that used SER to make the most out of their data set with this package.
 
 
 # Citation
 If you use this package, you can cite it as:
 
-_Kun Guo, Naicheng Wu and Tenna Riis (2019). SER: Short-period Environmental Regime. R package version 0.0._
+_Kun Guo, Naicheng Wu and Tenna Riis (2019). SER: Short-period Environmental Regime. R package version 0.1._
+
+# Reference
++ Kun Guo, Naicheng Wu, Paraskevi Manolaki, Annette Baattrup-Pedersen, and Tenna Riis. "Short-period hydrological regimes override physico-chemical variables in shaping stream diatom traits, biomass and biofilm community functions." Science of The Total Environment 743 (2020): 140720.
+
++ Kun Guo, Naicheng Wu, Wei Li, Annette Baattrup-Pedersen, and Tenna Riis. "Microbial biofilm community dynamics in five lowland streams." Science of The Total Environment 798 (2021): 149169.
+
++ Naicheng Wu, Yaochun Wang, Yixia Wang, Xiuming Sun, Claas Faber, and Nicola Fohrer. "Environment regimes play an important role in structuring trait‐and taxonomy‐based temporal beta diversity of riverine diatoms." Journal of Ecology 110, no. 6 (2022): 1442-1454.
 
