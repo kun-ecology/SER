@@ -31,9 +31,9 @@ Below is how the main function _SER_ works with the demo data:
 We highly recommend you read through the tutorial and then define your own short-period environmental indices.
 
 # Citation
-If you use this package, you can cite it as:
+If you use this package, please cite it as:
 
-_Kun Guo, Naicheng Wu and Tenna Riis (2019). SER: Short-period Environmental Regime. R package version 0.1._
+_Naicheng Wu, Kun Guo, Yi Zou, Fengzhi He, Tenna Riis (2023). SER: An R package to characterize environmental regimes. Ecology and Evolution, 13, e9882. https://doi.org/10.1002/ece3.9882_
 
 # Reference
 + Kun Guo, Naicheng Wu, Paraskevi Manolaki, Annette Baattrup-Pedersen, and Tenna Riis. "Short-period hydrological regimes override physico-chemical variables in shaping stream diatom traits, biomass and biofilm community functions." Science of The Total Environment 743 (2020): 140720.
