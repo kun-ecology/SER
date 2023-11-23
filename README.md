@@ -1,5 +1,4 @@
-# SER
-An R package **SER** for calulating _Short-period Environmental Regime (SER)_
+# SER: An R package to characterize environmental regimes [![DOI:10.1002/ece3.9882](http://img.shields.io/badge/DOI-10.1101/2021.01.08.425840-B31B1B.svg)](https://doi.org/10.1002/ece3.9882)
 
 **NOTES**: SER is extremely useful in linking time-series environmental variables to discrete biological responses. Specifically, SER function summaries time-series environmental variables into indices covering different facets i.e., magnitude, frequency, and rate of change of the data in any focused period, which are typically masked by using simple average or median values in conventional way. In total, 11 elementary indices were developed, and users can developed their own environmental regimes by changing the argument **days_bf**. Besides, it is recommended that users carefully read the vignette and check published studies (Guo et al. 2020, 2021; Wu et al. 2022) that used SER to make the most out of their data set with this package.
 
